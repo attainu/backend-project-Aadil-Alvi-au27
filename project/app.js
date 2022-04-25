@@ -1,13 +1,13 @@
 const express = require('express');
 
 const app = express();
-const port = 5000;
+const prt = process.env.port || 3000;
 app.get('/', (req, res) => {
-    res.send("home working")
+    res.send(res.sendFile(`${__dirname}/public/index.html`))
 })
 
 app.get('/nav', (req, res) => {
-    res.sendFile(`${__dirname}/public/nav.html`)
+    res.sendFile(`${__dirname}/public/orderNow.html`)
 })
 
 app.get('/nav/submit', (req, res) => {
@@ -17,6 +17,6 @@ app.get('/nav/submit', (req, res) => {
 
 
 
-app.listen(port, () => {
+app.listen(prt, () => {
     console.log("Server Connected")
 })
