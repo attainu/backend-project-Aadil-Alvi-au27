@@ -1,0 +1,20 @@
+.buttonColor {
+    color: white !important
+}
+
+#smoke {
+    color: white;
+}
+
+.help-block,
+#grill {
+    color: red;
+}
+
+#new-item {
+    color: white;
+}
+
+.bg {
+    background-color: rgb(70, 70, 70);
+}
