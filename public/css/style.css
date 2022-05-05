@@ -415,11 +415,19 @@ main {
 } */
 
 .sec-5 {
+    text-align: center;
     height: 90vh;
     background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../img/back-customers.jpg');
     background-size: cover;
     background-attachment: fixed;
     color: white;
+}
+
+.row h2 {
+    color: red;
+    font-family: 'Kaushan Script', cursive;
+    margin-top: 40px;
+    margin-bottom: 160px;
 }
 
 blockquote {
@@ -428,13 +436,13 @@ blockquote {
     font-family: 'Lato', sans-serif;
     font-weight: 300;
     font-style: italic;
-    margin-top: 40px;
+    margin-top: 70px;
     position: relative;
 
 }
 
 blockquote:before {
-    content: "201C";
+    content: "\201C";
     font-size: 500%;
     display: block;
     position: absolute;

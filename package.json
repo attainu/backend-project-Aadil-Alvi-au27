@@ -1,7 +1,7 @@
 {
   "name": "restaurant",
   "version": "1.0.0",
-  "description": "",
+  "description": "BackEnd Project\r AnonymousDuo (Name not selected yet)\r Description\r We are creating a Full Stack Website on restaurants for  taking orders online at your fingertips . We are also trying to make our website as responsive as possible.  To secure the web application, we are using Json Web Tokens for authentication of every route. Remaining technical details are below.\r The Core Feature of Our Project :- \r Login page\r Feedback from our old customers\r Search Filter option \r Add to cart option \r Promo code(if possible)\r Delivery page \r The Framework ,Library and Database we might use in our project :-",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

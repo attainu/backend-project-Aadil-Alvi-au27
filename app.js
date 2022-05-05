@@ -9,7 +9,7 @@ const app = express();
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
-const prt = process.env.port || 3000;
+const prt = process.env.PORT || 3000;
 
 dbHelper.dbinit()
 
