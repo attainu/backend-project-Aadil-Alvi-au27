@@ -1,4 +1,3 @@
-
 const getData = async () => {
     const productsResponse = await fetch('/items')
     const products = await productsResponse.json()
@@ -9,26 +8,12 @@ async function putData() {
 
     const data = await getData()
     const productEle = document.getElementById('products')
-    var idCart = []
 
+    const arr = [];
     data.map((product) => {
         const newEle = document.createElement('div')
         newEle.className = "card m-2"
         newEle.style = "width: 16rem;"
-        idCart.push(product.Dish_name)
-        // console.log(idCart, 'map')
-        // newEle.innerText = `${product.Dish_name}`
-
-        // if (product.imageUrl) {
-        const imageTag = document.createElement(`img`)
-        imageTag.src = product.imageUrl
-        imageTag.className = "card-img-top"
-        // imageTag.height = "200px"
-        newEle.appendChild(imageTag)
-        // }
-        const divEle = document.createElement('div')
-        divEle.className = "card-body"
-
 
         if (product.category == 'Veg') {
             cate = "../../img/veg.png"
@@ -37,64 +22,126 @@ async function putData() {
             cate = "../../img/non-veg.png"
         }
 
-        // if (product.Dish_name) {
+        //    product Image start
+        const imageTag = document.createElement(`img`)
+        imageTag.src = product.imageUrl
+        imageTag.className = "card-img-top"
+        newEle.appendChild(imageTag)
+        const divType = document.createElement('div')
+        divType.style = 'position: absolute;right: 16px;top:10px'
+        const imgType = document.createElement('img')
+        imgType.src = cate
+        imgType.height = "40"
+        imgType.width = "40"
+        divType.appendChild(imgType)
+        newEle.appendChild(divType)
+        //    product Image end
+        const divEle = document.createElement('div')
+
+        divEle.className = "card-body"
+
+
+
+
+
+        //    product.Dish_name
         const headerName = document.createElement('h5')
         headerName.className = "card-title card-header bg-dark text-danger"
-        headerName.id = "dishName"
-        headerName.innerHTML = `<img src="${cate}" height="25px" width=25px alt="Category"> ${product.Dish_name}`
+        headerName.id = `${product._id}dishName`
+        headerName.innerHTML = ` ${product.Dish_name}`
         divEle.appendChild(headerName)
-        // }
-        // if (product.price) {
+
+        //product.price
         const Cost = document.createElement('div')
         Cost.className = "card-title mt-2"
-        Cost.id = "dishPrice"
-        Cost.innerText = `Price: ₹ ${product.price} /-`
+        Cost.id = `${product._id}dishPrice`
+        Cost.innerText = `${product.price}`
         divEle.appendChild(Cost)
 
-        // }
+
         const cart = document.createElement('button')
         cart.className = "btn-outline-danger mt-2 btn-dark"
-        cart.id = `addCartBtn${product.Dish_name}`
+        cart.id = product._id
         cart.innerText = "Add to Cart"
         divEle.appendChild(cart)
-
-        const CartBtn = document.getElementById(`addCartBtn${product.Dish_name}`)
-        console.log(CartBtn);
 
         newEle.appendChild(divEle)
 
         productEle.appendChild(newEle)
-    })
 
-    addToCartHAndler()
-
-
-
-
-
-
-    if (data) {
-        // let idCart = product.Dish_name
-        // console.log(idCart);
-        idCart.map((id, idx) => {
-            console.log(idx);
-            // const dish = document.getElementById('dishName')
-            // const price = document.getElementById('dishPrice')
-            // const CartBtn = document.getElementById(`addCartBtn${idx}`)
-            // CartBtn.addEventListener('click', function (e) {
-            //     e.preventDefault()
-            //     console.log(dish.innerHTML)
-            //     console.log(price.innerText)
+        const dish = document.getElementById(`${product._id}dishName`)
+        const price = document.getElementById(`${product._id}dishPrice`)
+        const CartBtn = document.getElementById(product._id)
+        CartBtn.addEventListener('click', () => {
+            let qty = 1
+            let foundIdx = arr.findIndex(elment => elment.productId == product._id);
 
 
-            // })
+            if (foundIdx >= 0) {
+                console.log(arr[foundIdx].Quantity, 'value');
+                arr[foundIdx].Quantity = parseInt(arr[foundIdx].Quantity) + 1
+
+                console.log(arr);
+            }
+            else {
+                arr.push({ Quantity: qty, productId: product._id, Dish_name: dish.innerText, price: price.innerText });
+            }
+            const cartadd = (arr) => {
+                const cartEle = document.getElementById('cartForm')
+                cartEle.innerHTML = " "
+                var table = document.createElement('table')
+
+                arr.map((data) => {
+                    var row = document.createElement('tr');
+                    var cell1 = document.createElement('td');
+                    cell1.appendChild(document.createTextNode(data.Dish_name));
+                    row.appendChild(cell1);
+
+                    var cell2 = document.createElement('td');
+                    cell2.appendChild(document.createTextNode(data.Quantity));
+                    row.appendChild(cell2);
+
+                    var cell3 = document.createElement('td');
+                    cell3.appendChild(document.createTextNode(data.price));
+                    row.appendChild(cell3);
+
+
+                    // const dishName = document.createElement('input')
+                    // dishName.value = data.Dish_name
+                    // dishName.disabled = true
+                    // cell.appendChild(dishName)
+
+
+                    // const dishQty = document.createElement('input')
+                    // dishQty.value = data.Quantity
+                    // dishQty.disabled = true
+                    // cell.appendChild(dishQty)
+
+                    // const dishPrice = document.createElement('input')
+                    // dishPrice.value = data.price
+                    // dishPrice.disabled = true
+                    // cell.appendChild(dishPrice)
+
+                    table.appendChild(row)
+                })
+                cartEle.appendChild(table)
+
+
+            }
+
+            cartadd(arr)
+
+
 
         })
 
+    })
 
-    }
 
 
 }
 
+
 putData()
+
+
